@@ -10,25 +10,6 @@ Protein-Packed: Our menu includes high-protein options for muscle building and e
 Sustainable & Eco-Friendly: We are committed to using sustainable practices and reducing food waste.
 Vibrant & Flavorful: Our meals are full of flavor and color, making eating healthy an enjoyable experience.
 
-Menu
-Nutritious Dry Fruits
-Choose from a variety of energy-boosting dry fruits, perfect for snacks or additions to meals.
-
-Fresh Fruits & Smoothies
-Enjoy nutrient-packed smoothies and refreshing fruit bowls that can be customized to your preferences.
-
-Salads & Bowls
-We offer hearty, protein-rich salads, featuring fresh greens, sprouts, and wholesome grains.
-
-Egg Delights
-Protein-packed eggs, served in a variety of ways to suit your cravings and dietary needs.
-
-Healthy Sandwiches & Wraps
-Enjoy whole-grain wraps and sandwiches filled with fresh vegetables, lean proteins, and delicious sauces.
-
-Hearty Bites
-Customize your meal with a selection of tasty, balanced options perfect for fueling your day.
-
 Technologies
 If this README is for a project repository (like your website or app):
 
@@ -43,7 +24,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Contact
 For more information, or for any inquiries:
 
-Email: [your-email@example.com]
-Website: [your-website-link]
-Instagram: [@yourinstagramhandle]
-Twitter: [@yourtwitterhandle]
+Email: [amithalex5251@example.com]
+
