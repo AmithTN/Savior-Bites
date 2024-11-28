@@ -24,5 +24,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Contact
 For more information, or for any inquiries:
 
-Email: [amithtn26@gmail.com]
+Email: amithtn26@gmail.com
 
