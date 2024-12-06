@@ -1,6 +1,8 @@
 function addToCart(category) {
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-    const inputs = document.querySelectorAll(`input[data-product]`);
+//    const inputs = document.querySelectorAll(`input[data-product]`);
+    const inputs = document.querySelectorAll(`input[data-category="${category}"]`);
+
 
     inputs.forEach(input => {
         // Get the product's name and price
@@ -47,15 +49,6 @@ function addToCart(category) {
    // console.log('Updated cartData:', cartData);
 
    displayCartItems();
-}
-
-// Function to display cart items (can be used to show cart contents)
-function displayCartItems() {
-    const cartData = JSON.parse(localStorage.getItem('cartData')) || {};
-    
-    // Example of how you can loop through cartData and display the cart items
-    console.log('Cart Data:', cartData);
-    // You can customize this to update the cart UI, for example, displaying the items added per category
 }
 
 
