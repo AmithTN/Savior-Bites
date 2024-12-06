@@ -200,7 +200,7 @@
                                             <a href="menu.html" class="elementor-item  elementor-item-active">Menu</a>
                                             <ul class="submenu">
                                                 <li><a href="curatedmeals.html">Curated Meals</a></li>
-                                                 <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
+                <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
                                                 <li><a href="dryfruits.html">Nutritious Dry Fruits</a></li>
                                                 <li><a href="fruits.html">Fresh Fruits</a></li>
                                                 <li><a href="veggies.html">Veggies</a></li>
@@ -234,7 +234,7 @@
                                             <a href="menu.html" class="elementor-item  elementor-item-active" tabindex="-1">Menu</a>
                                             <ul class="submenu">
                                                 <li><a href="curatedmeals.html">Curated Meals</a></li>
-                                                 <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
+                <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
                                                 <li><a href="dryfruits.html">Nutritious Dry Fruits</a></li>
                                                 <li><a href="fruits.html">Fresh Fruits</a></li>
                                                 <li><a href="veggies.html">Veggies</a></li>
@@ -332,7 +332,7 @@
                                         <a href="menu.html" class="elementor-item">Menu</a>
                                         <ul class="submenu">
                                             <li><a href="curatedmeals.html">Curated Meals</a></li>
-                                             <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
+                <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
                                             <li><a href="dryfruits.html">Nutritious Dry Fruits</a></li>
                                             <li><a href="fruits.html">Fresh Fruits</a></li>
                                             <li><a href="veggies.html">Veggies</a></li>
@@ -369,7 +369,7 @@
                                         </a>
                                         <ul class="submenu-1" style="display: none;">
                                             <li><a href="curatedmeals.html">Curated Meals</a></li>
-                                            <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
+                <!--                                <li><a href="heartybites.html">Hearty Bites</a></li>           -->
                                             <li ><a href="dryfruits.html">Nutritious Dry Fruits</a></li>
                                             <li><a href="fruits.html">Fresh Fruits</a></li>
                                             <li><a href="veggies.html">Veggies</a></li>
@@ -407,6 +407,174 @@
                         </div>
                     </div>
 
+                    <style>
+                        @media screen and (min-width: 768px) {
+                            .Submitdiv {                              
+                                padding-right: 0px !important;
+                            }
+                        }
+                    </style>
+
+                    <div class="container-fluid">
+                        <div class="row mt-4">
+
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <!-- Product Image -->
+                                    <img src="boiled eggs.jpg" class="card-img-top" alt="Boiled Eggs">
+                                    
+                                    <div class="card-body">
+                                        <h4 class="card-title">Boiled Eggs</h4>
+                            
+                                        <div style="font-size: 0.9em; color: #666;">(Protein-packed, Nutritious)</div>
+                                        <p>Freshly boiled eggs, rich in protein and essential nutrients, perfect for a quick and healthy snack.</p>
+                            
+                                        <!-- Price and Quantity Controls -->
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Price (Left) -->
+                                            <div style="font-weight: bold; font-size: 1rem;">
+                                                <strong>₹14</strong>
+                                            </div>
+                            
+                                            <!-- Quantity Controls (Right) -->
+                                            <div class="quantity-controls d-flex align-items-center">
+                                                <button onclick="decreaseQuantity(1)">-</button>
+                                                <input type="number" id="quantity1" value="0" min="0" onchange="updateSubtotal(1, 14)" data-product="Boiled Eggs" data-category="boiledeggs" data-price="14" >
+                                                <button onclick="increaseQuantity(1)">+</button>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subtotal (Below) -->
+                                        <div class="text-end mt-2" style="font-weight: bold; font-size: 1rem;">
+                                            Subtotal: <span id="subtotal1">₹0</span>
+                                        </div>
+                            
+                                        <div class="Submitdiv d-flex justify-content-center align-items-center">
+                                            <button class="Submit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addToCart('boiledeggs');">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <!-- Product Image -->
+                                    <img src="omelet.jpg" class="card-img-top" alt="Egg Omelet">
+                                    
+                                    <div class="card-body">
+                                        <h4 class="card-title">Egg Omelet</h4>
+                            
+                                        <div style="font-size: 0.9em; color: #666;">(Fluffy, Protein-rich)</div>
+                                        <p>Delicious fluffy egg omelet prepared with a hint of spices, perfect for a hearty breakfast or snack.</p>
+                            
+                                        <!-- Price and Quantity Controls -->
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Price (Left) -->
+                                            <div style="font-weight: bold; font-size: 1rem;">
+                                                <strong>₹29</strong>
+                                            </div>
+                            
+                                            <!-- Quantity Controls (Right) -->
+                                            <div class="quantity-controls d-flex align-items-center">
+                                                <button onclick="decreaseQuantity(2)">-</button>
+                                                <input type="number" id="quantity2" value="0" min="0" onchange="updateSubtotal(2, 29)" data-product="Egg Omelet" data-category="eggomelet" data-price="29" >
+                                                <button onclick="increaseQuantity(2)">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subtotal (Below) -->
+                                        <div class="text-end mt-2" style="font-weight: bold; font-size: 1rem;">
+                                            Subtotal: <span id="subtotal2">₹0</span>
+                                        </div>
+                            
+                                        <div class="Submitdiv d-flex justify-content-center align-items-center">
+                                            <button class="Submit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addToCart('eggomelet');">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <!-- Product Image -->
+                                    <img src="scrambled egg.jpg" class="card-img-top" alt="Scrambled Egg">
+                                    
+                                    <div class="card-body">
+                                        <h4 class="card-title">Scrambled Egg</h4>
+                            
+                                        <div style="font-size: 0.9em; color: #666;">(Creamy, Protein-packed)</div>
+                                        <p>Creamy scrambled eggs cooked to perfection, offering a healthy and tasty option for any meal.</p>
+                            
+                                        <!-- Price and Quantity Controls -->
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Price (Left) -->
+                                            <div style="font-weight: bold; font-size: 1rem;">
+                                                <strong>₹29</strong>
+                                            </div>
+                            
+                                            <!-- Quantity Controls (Right) -->
+                                            <div class="quantity-controls d-flex align-items-center">
+                                                <button onclick="decreaseQuantity(3)">-</button>
+                                                <input type="number" id="quantity3" value="0" min="0" onchange="updateSubtotal(3, 29)" data-product="Scrambled Egg" data-category="scrambledegg" data-price="29" >
+                                                <button onclick="increaseQuantity(3)">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subtotal (Below) -->
+                                        <div class="text-end mt-2" style="font-weight: bold; font-size: 1rem;">
+                                            Subtotal: <span id="subtotal3">₹0</span>
+                                        </div>
+                            
+                                        <div class="Submitdiv d-flex justify-content-center align-items-center">
+                                            <button class="Submit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addToCart('scrambledegg');">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-4">
+                                <div class="card" style="margin-bottom: 20px;">
+                                    <!-- Product Image -->
+                                    <img src="egg salad.jpg" class="card-img-top" alt="Egg Salad">
+                                    
+                                    <div class="card-body">
+                                        <h4 class="card-title">Egg Salad</h4>
+                            
+                                        <div style="font-size: 0.9em; color: #666;">(Healthy, Nutritious)</div>
+                                        <p>Freshly prepared egg salad mixed with veggies and a light dressing, ideal for a balanced and refreshing meal.</p>
+                            
+                                        <!-- Price and Quantity Controls -->
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <!-- Price (Left) -->
+                                            <div style="font-weight: bold; font-size: 1rem;">
+                                                <strong>₹59</strong>
+                                            </div>
+                            
+                                            <!-- Quantity Controls (Right) -->
+                                            <div class="quantity-controls d-flex align-items-center">
+                                                <button onclick="decreaseQuantity(4)">-</button>
+                                                <input type="number" id="quantity4" value="0" min="0" onchange="updateSubtotal(4, 59)" data-product="Egg Salad" data-category="eggsalad" data-price="59" >
+                                                <button onclick="increaseQuantity(4)">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Subtotal (Below) -->
+                                        <div class="text-end mt-2" style="font-weight: bold; font-size: 1rem;">
+                                            Subtotal: <span id="subtotal4">₹0</span>
+                                        </div>
+                            
+                                        <div class="Submitdiv d-flex justify-content-center align-items-center">
+                                            <button class="Submit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addToCart('eggsalad');">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+<!--
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -420,11 +588,11 @@
                             <tbody>
                                 <tr>
                                     <td>Boiled Egg</td>
-                                    <td>₹20</td>
+                                    <td>₹14</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(1)">-</button>
-                                            <input type="number" id="quantity1" value="0" min="0" onchange="updateSubtotal(1, 20)" data-product="Boiled Egg" data-price="20" disabled>
+                                            <input type="number" id="quantity1" value="0" min="0" onchange="updateSubtotal(1, 14)" data-product="Boiled Egg" data-price="14" >
                                             <button onclick="increaseQuantity(1)">+</button>
                                         </div>
                                     </td>
@@ -432,11 +600,11 @@
                                 </tr>
                                 <tr>
                                     <td>Egg Omelet</td>
-                                    <td>₹10</td>
+                                    <td>₹14</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(2)">-</button>
-                                            <input type="number" id="quantity2" value="0" min="0" onchange="updateSubtotal(2, 10)" data-product="Egg Omelet" data-price="10" disabled>
+                                            <input type="number" id="quantity2" value="0" min="0" onchange="updateSubtotal(2, 14)" data-product="Egg Omelet" data-price="14" >
                                             <button onclick="increaseQuantity(2)">+</button>
                                         </div>
                                     </td>
@@ -444,11 +612,11 @@
                                 </tr>
                                 <tr>
                                     <td>Scrumbeled Egg</td>
-                                    <td>₹20</td>
+                                    <td>₹19</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(3)">-</button>
-                                            <input type="number" id="quantity3" value="0" min="0" onchange="updateSubtotal(3, 20)" data-product="Scrumbeled Egg" data-price="20" disabled>
+                                            <input type="number" id="quantity3" value="0" min="0" onchange="updateSubtotal(3, 19)" data-product="Scrumbeled Egg" data-price="19" >
                                             <button onclick="increaseQuantity(3)">+</button>
                                         </div>
                                     </td>
@@ -456,36 +624,40 @@
                                 </tr>
                                
                                 <tr>
-                                    <td>Egg Muffins</td>
-                                    <td>₹20</td>
+                                    <td>Egg Salad</td>
+                                    <td>₹59</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(4)">-</button>
-                                            <input type="number" id="quantity4" value="0" min="0" onchange="updateSubtotal(4, 20)" data-product="Egg Muffins" data-price="20" disabled>
+                                            <input type="number" id="quantity4" value="0" min="0" onchange="updateSubtotal(4, 59)" data-product="Egg Salad" data-price="59" >
                                             <button onclick="increaseQuantity(4)">+</button>
                                         </div>
                                     </td>
                                     <td id="subtotal4">₹0</td>
                                 </tr>
+
+
+
                                 <tr>
-                                    <td>Egg Salad</td>
+                                    <td>Egg Muffins</td>
                                     <td>₹20</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(5)">-</button>
-                                            <input type="number" id="quantity5" value="0" min="0" onchange="updateSubtotal(5, 20)" data-product="Egg Salad" data-price="20" disabled>
+                                            <input type="number" id="quantity5" value="0" min="0" onchange="updateSubtotal(5, 20)" data-product="Egg Muffins" data-price="20" >
                                             <button onclick="increaseQuantity(5)">+</button>
                                         </div>
                                     </td>
                                     <td id="subtotal5">₹0</td>
                                 </tr>           
+
                                 <tr>
                                     <td>Deviled Eggs</td>
                                     <td>₹20</td>
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(6)">-</button>
-                                            <input type="number" id="quantity6" value="0" min="0" onchange="updateSubtotal(6, 20)" data-product="Deviled Eggs" data-price="20" disabled>
+                                            <input type="number" id="quantity6" value="0" min="0" onchange="updateSubtotal(6, 20)" data-product="Deviled Eggs" data-price="20" >
                                             <button onclick="increaseQuantity(6)">+</button>
                                         </div>
                                     </td>
@@ -497,15 +669,17 @@
                                     <td>
                                         <div class="quantity-controls">
                                             <button onclick="decreaseQuantity(7)">-</button>
-                                            <input type="number" id="quantity7" value="0" min="0" onchange="updateSubtotal(7, 20)" data-product="Frittata" data-price="20" disabled>
+                                            <input type="number" id="quantity7" value="0" min="0" onchange="updateSubtotal(7, 20)" data-product="Frittata" data-price="20" >
                                             <button onclick="increaseQuantity(7)">+</button>
                                         </div>
                                     </td>
                                     <td id="subtotal7">₹0</td>
-                                </tr>                              
+                                </tr>    
+                               
+                                
                             </tbody>
                         </table>
-                        
+
                         <div id="totalDisplay" style="font-weight: bold !important; font-size: 1rem !important;"> 
                             <h5><b>Total</b> : ₹0 </h5>
                         </div>
@@ -514,9 +688,10 @@
                         <div class="Submitdiv">
                             <button class="Submit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="addToCart('egg');">Add to Cart</button></a>
                         </div>
-
+                      
                     </div>       
-                    
+--> 
+
                     <!-- Modal -->
                      
                     <div class="modal fade mx-auto" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
@@ -662,16 +837,21 @@
             <div class="elementor-element elementor-element-7656c3f1 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7656c3f1" data-element_type="widget" data-widget_type="icon-list.default">
                 <div class="elementor-widget-container">
                     <ul class="elementor-icon-list-items">
-                            <li class="elementor-icon-list-item">
-                                        <a href="#">
-                                            <span class="elementor-icon-list-text">5:30 am to 2:30 pm</span>
-                                        </a>
-                            </li>
-                            <li class="elementor-icon-list-item">
-                                        <a href="#">
-                                            <span class="elementor-icon-list-text">5:30 pm to 11:00 pm</span>
-                                        </a>
-                            </li>
+                        <li class="elementor-icon-list-item">
+                            <a href="#">
+                                <span class="elementor-icon-list-text">6:00 am to 9:00 am</span>
+                            </a>
+                        </li>
+                        <li class="elementor-icon-list-item">
+                            <a href="#">
+                                <span class="elementor-icon-list-text">1:00 pm to 3:00 pm</span>
+                            </a>
+                        </li>
+                        <li class="elementor-icon-list-item">
+                            <a href="#">
+                                <span class="elementor-icon-list-text">5:00 pm to 7:00 pm</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
