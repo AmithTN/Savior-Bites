@@ -571,24 +571,20 @@
                                             <input type="tel" name="form_fields[PhoneNo]" id="form-field-PhoneNo" class="elementor-field elementor-size-md elementor-field-textual" placeholder="Enter number here" required="required" aria-required="true" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number">
                                         </div>
                                     
-<!--                                    
-                                       <div class="elementor-field-group">
+                                        <div class="elementor-field-group">
                                             <label for="form-field-email" class="elementor-field-label">Email</label>
                                             <input type="email" name="form_fields[email]" id="form-field-email" class="elementor-field elementor-size-md elementor-field-textual" placeholder="Enter email ID here">
                                         </div>
--->     
                                     
                                         <div class="elementor-field-group elementor-field-required">
-                                            <label for="form-field-address" class="elementor-field-label">Delivery Address <span style="color: red;">*</span></label>
+                                            <label for="form-field-address" class="elementor-field-label">Address <span style="color: red;">*</span></label>
                                             <input type="text" name="form_fields[address]" id="form-field-address" class="elementor-field elementor-size-md elementor-field-textual" placeholder="Enter address here" required="required" aria-required="true">
                                         </div>
 
-<!--
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-pincode" class="elementor-field-label">Pin Code <span style="color: red;">*</span></label>
                                             <input type="text" name="form_fields[pincode]" id="form-field-pincode" class="elementor-field elementor-size-md elementor-field-textual" placeholder="Enter pin code here" required="required" aria-required="true" pattern="\d{6}" title="Please enter a valid 6-digit pin code">
                                         </div>
--->
 
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-veggies" class="elementor-field-label">Veggies Preference<span style="color: red;">*</span></label>
@@ -614,35 +610,25 @@
                                             <label for="form-field-gym" class="elementor-field-label">Gym Preference<span style="color: red;">*</span></label>
                                             <select name="form_fields[gym]" id="form-field-gym" class="elementor-field elementor-size-md" required="required" aria-required="true">
                                                 <option value="" disabled selected>Select an option</option>
-                                                <option value="fitindia">Fit India</option>
-                                                <option value="fitin">FitIn</option>
-                                                <option value="fitnoholic">Fitnoholic</option>
-                                                <option value="muscalzone">Muscal Zone</option>
                                                 <option value="goldsgym">Gold's Gym</option>
-                                                <option value="hulkfitness">Hulk Fitness</option>
-                                                <option value="powerhouse">Power House</option>
-                                                <option value="powerpack">Power Pack</option>
-                                                <option value="rawfitness">Raw Fitness</option>
-                                                <option value="universalfitness">Universal Fitness</option>
                                                 <option value="none">None</option>
                                             </select>
                                         </div>
                                         
-                                        <div class="elementor-field-group">
-                                            <label for="form-field-message" class="elementor-field-label">Customization Message
-                                                <textarea name="form_fields[message]" id="form-field-message" class="elementor-field-textual elementor-field elementor-size-md" rows="4" placeholder="Type your message here"></textarea>	
-                                            </label>
-                                        </div>
                                 
                                         <div class="elementor-field-group">
-                                            <label for="payment_method_phonepe" class="elementor-field-label">PhonePe Payment Solutions </label>
-                                                <img class = "payment_methods" src="https://imgstatic.phonepe.com/images/online-merchant-assets/plugins/woocommerce/2529/405/payment_gateway_logo.png" alt="PhonePe Payment Solutions">	
-                                            
-                                                <div class="payment_box payment_method_phonepe" style="display: block;">
-                                                    <p>All UPI apps, Debit and Credit Cards, and NetBanking accepted </p>
-                                                </div>
-                                        </div>
-                                        
+                                            <label for="payment_method_phonepe" class="elementor-field-label"> Payment Solutions </label>
+                                            <div class="payment-methods-container">
+                                                <img class="payment_methods" src="C:\Users\amith\Downloads\Savior Bites\gpay.webp" alt="PhonePe Payment Solutions">	
+                                                <img class="payment_methods" src="C:\Users\amith\Downloads\Savior Bites\phonepe.webp" alt="PhonePe Payment Solutions">	
+                                                <img class="payment_methods" src="C:\Users\amith\Downloads\Savior Bites\paytm.webp" alt="PhonePe Payment Solutions">	
+                                                <img class="payment_methods" src="C:\Users\amith\Downloads\Savior Bites\amazon-pay.webp" alt="PhonePe Payment Solutions">	
+
+                                            </div>
+                                            <div class="payment_box payment_method_phonepe" style="display: block;">
+                                                <p>All UPI payments are accepted </p>
+                                            </div>
+                                        </div>           
                      
                                         <button type="submit" id="place_order" class="button alt  elementor-button-submit" name="checkout_place_order"  value="Place order" data-value="Place order">Place order</button>
                                   
@@ -654,7 +640,21 @@
                 </div>
             </div>
         </section>
-    </div>                 
+    </div>                
+    
+    <style>
+                                            
+        .payment-methods-container {
+            display: flex; /* Align items horizontally */
+            gap: 10px; /* Add space between images */
+        }
+
+        .payment_methods {
+            width: 50px; /* Adjust width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+    </style>
 
     <div id="wa" class="wa__widget_container">
         <div class="wa__btn_popup_txt">
@@ -766,7 +766,7 @@
         <div class="elementor-widget-wrap elementor-element-populated">
                     <div class="elementor-element elementor-element-6b951e6 elementor-widget elementor-widget-heading" data-id="6b951e6" data-element_type="widget" data-widget_type="heading.default">
                         <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default" style="color : #0A472E;">Service Timings</h2>		
+                            <h2 class="elementor-heading-title elementor-size-default" style="color : #0A472E;">Services Timings</h2>		
                         </div>
                     </div>
             <div class="elementor-element elementor-element-7656c3f1 elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7656c3f1" data-element_type="widget" data-widget_type="icon-list.default">
