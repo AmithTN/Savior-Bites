@@ -318,11 +318,13 @@ function checkout() {
         console.log('Checkout data sent:', data);
         alert('Order placed successfully! Now proceeding to payment.');
 
+        // Initiate payment
+        initiatePayment();
+        
         // Send confirmation email after checkout
         sendEmail(billingDetails, cartData, totalAmount);
 
-        // Initiate payment
-        initiatePayment();
+        
 
         // Clear the cart after checkout and payment initiation
         clearCart();
