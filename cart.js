@@ -279,7 +279,7 @@ function clearCart() {
     alert("Thank you for your purchase!");
 }
 
-// Function to send an email using EmailJS
+
 function sendEmail(billingDetails, cartData, totalAmount) {
     const templateParams = {
         user_name: billingDetails.name,
@@ -290,26 +290,29 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         total_amount: totalAmount
     };
 
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
-    .then(response => {
+    try {
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+        .then(response => {
+            // Show customer-friendly message for success
+            alert("Order placed successfully!");
 
-        // Show customer-friendly message for success 
-        alert("Order placed successfully!");
+            console.log("Email sent successfully:", response.status, response.text); // For debugging
 
-        console.log("Email sent successfully:", response.status, response.text);  // For your debugging purposes
-     
-        // Clear the cart after checkout and payment initiation
-        clearCart();
+            // Clear the cart after successful email
+            clearCart();
+        })
+        .catch(error => {
+            // Log the error for debugging
+            console.error("Failed to send email:", error);
 
-    })
-    .catch(error => {
-
-        // Show customer-friendly message for failure
-        alert("We encountered an issue while processing your order. Please try again.");
-
-        console.error("Failed to send email:", error); // For your debugging purposes
-    })
-
+            // Show customer-friendly message for failure
+            alert("We encountered an issue while processing your order. Please try again.");
+        });
+    } catch (error) {
+        // Catch any synchronous errors in the try block
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred. Please try again later.");
+    }
 }
 
 
@@ -337,6 +340,7 @@ function checkout() {
     })
 
     .then(response => response.json())
+
 
         // Initiate payment
         initiatePayment();
