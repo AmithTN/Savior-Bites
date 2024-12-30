@@ -265,8 +265,7 @@ function initiatePayment() {
     const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
 
-        // Send confirmation email after checkout
-        sendEmail(billingDetails, cartData, totalAmount);
+
 }
 
 // Function to clear the cart
@@ -344,6 +343,9 @@ function checkout() {
 
         // Initiate payment
         initiatePayment();
+
+        // Send confirmation email after checkout
+        sendEmail(billingDetails, cartData, totalAmount);
 
 }
 
