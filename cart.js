@@ -264,17 +264,15 @@ function initiatePayment() {
     const totalAmount = localStorage.getItem('cartTotal');
     const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
-
-    // Send confirmation email after checkout
-      sendEmail(billingDetails, cartData, totalAmount);
 }
 
 // Function to clear the cart
 function clearCart() {
-/*    localStorage.removeItem('cartData');
+
+    localStorage.removeItem('cartData');
     localStorage.removeItem('cartTotal');
     document.getElementById('cart-container').innerHTML = '';
-    document.getElementById('cart-total').textContent = '0';    */
+    document.getElementById('cart-total').textContent = '0';    
     alert("Thank you for your purchase!");
 }
 
@@ -291,25 +289,35 @@ function sendEmail(billingDetails, cartData, totalAmount) {
 
     emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
     .then(response => {
-        console.log("Email sent successfully:", response.status, response.text);
-    })
-    .catch(error => console.error("Failed to send email:", error));
 
-    // Clear the cart after checkout and payment initiation
-        clearCart();
+        // Show customer-friendly message for success 
+        alert("Order placed successfully!");
+
+        console.log("Email sent successfully:", response.status, response.text);  // For your debugging purposes
+    })
+    .catch(error => {
+
+        // Show customer-friendly message for failure
+        alert("We encountered an issue while processing your order. Please try again.");
+
+        console.error("Failed to send email:", error); // For your debugging purposes
+    })
 }
+
 
 // Function to handle the checkout process
 function checkout() {
     if (!validateForm()) return;
 
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+
     const billingDetails = {
         name: document.getElementById('form-field-fullname').value,
         phone: document.getElementById('form-field-PhoneNo').value,
         address: document.getElementById('form-field-address').value,
         pincode: document.getElementById('form-field-pincode').value
     };
+
     const totalAmount = localStorage.getItem('cartTotal');
 
     fetch('/checkout', {
@@ -319,16 +327,24 @@ function checkout() {
         },
         body: JSON.stringify({ cartData, billingDetails }),
     })
+
     .then(response => response.json())
-    .then(data => {
-        console.log('Checkout data sent:', data);
-        alert('Order placed successfully! Now proceeding to payment.');
+
+   
+
+        // Send confirmation email after checkout
+     //   sendEmail(billingDetails, cartData, totalAmount);
 
         // Initiate payment
         initiatePayment();
-      
-    })
-    .catch(error => console.error('Error:', error));
+
+        // Send confirmation email after checkout
+        sendEmail(billingDetails, cartData, totalAmount);
+
+        // Clear the cart after checkout and payment initiation
+        clearCart();
+   
+    
 }
 
 // Attach checkout function to Place Order button
