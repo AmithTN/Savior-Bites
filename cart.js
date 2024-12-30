@@ -264,6 +264,9 @@ function initiatePayment() {
     const totalAmount = localStorage.getItem('cartTotal');
     const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
+
+    // Send confirmation email after checkout
+      sendEmail(billingDetails, cartData, totalAmount);
 }
 
 // Function to clear the cart
@@ -291,6 +294,9 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         console.log("Email sent successfully:", response.status, response.text);
     })
     .catch(error => console.error("Failed to send email:", error));
+
+    // Clear the cart after checkout and payment initiation
+        clearCart();
 }
 
 // Function to handle the checkout process
@@ -320,14 +326,7 @@ function checkout() {
 
         // Initiate payment
         initiatePayment();
-        
-        // Send confirmation email after checkout
-        sendEmail(billingDetails, cartData, totalAmount);
-
-        
-
-        // Clear the cart after checkout and payment initiation
-        clearCart();
+      
     })
     .catch(error => console.error('Error:', error));
 }
