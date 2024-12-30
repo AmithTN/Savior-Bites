@@ -302,6 +302,9 @@ function sendEmail(billingDetails, cartData, totalAmount) {
 
         console.error("Failed to send email:", error); // For your debugging purposes
     })
+
+       // Clear the cart after checkout and payment initiation
+        clearCart();
 }
 
 
@@ -340,9 +343,6 @@ function checkout() {
 
         // Send confirmation email after checkout
         sendEmail(billingDetails, cartData, totalAmount);
-
-        // Clear the cart after checkout and payment initiation
-        clearCart();
    
     
 }
