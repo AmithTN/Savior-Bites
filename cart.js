@@ -1,4 +1,3 @@
-
 function addToCart(category) {
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
 //    const inputs = document.querySelectorAll(`input[data-product]`);
@@ -90,10 +89,17 @@ function displayCartItems() {
 // Check if the cart is empty
 if (cartData.length === 0) {
     const emptyCartMessage = `
-        <p style="font-size: 2em; display: flex; min-height: 150px; align-items: center; justify-content: center;">
-            Your cart is empty!
-        </p>
+        <div style="font-size: 2em; display: flex; min-height: 150px; align-items: center; justify-content: center;">
+            <p style="margin: 0; white-space: nowrap;">🛒 Your cart is empty!</p>
+        </div>
+          
+        <div class="elementor-field-group elementor-field-type-submit" style="text-align: center;">
+            <button onclick="window.location.href='menu.html'" class="elementor-button elementor-button-submit elementor-size-sm">
+                Start Shopping
+            </button>
+        </div>
     `;
+
     cartItemsContainer.innerHTML = emptyCartMessage;
     cartItemsContainerMobile.innerHTML = emptyCartMessage;
     updateCartQuantity();
@@ -232,8 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function validateForm() {
     const nameField = document.getElementById('form-field-fullname');
     const phoneField = document.getElementById('form-field-PhoneNo');
-    const addressField = document.getElementById('form-field-address');
-    const pincodeField = document.getElementById('form-field-pincode');
+    const addressField = document.getElementById('form-field-address'); 
+    const veggiesField = document.getElementById('form-field-veggies');
+    const sproutsField = document.getElementById('form-field-sprouts');
+    const gymField = document.getElementById('form-field-gym');
+
 
     if (!nameField.value.trim()) {
         nameField.setCustomValidity("Please enter your full name.");
@@ -256,17 +265,48 @@ function validateForm() {
         pincodeField.setCustomValidity("");
     }
 
+    if (!veggiesField.value) {
+        veggiesField.setCustomValidity("Please select a veggies preference.");
+        isValid = false;
+    } else {
+        veggiesField.setCustomValidity("");
+    }
+
+    if (!sproutsField.value) {
+        sproutsField.setCustomValidity("Please select a sprouts preference.");
+        isValid = false;
+    } else {
+        sproutsField.setCustomValidity("");
+    }
+
+    if (!gymField.value) {
+        gymField.setCustomValidity("Please select a gym preference.");
+        isValid = false;
+    } else {
+        gymField.setCustomValidity("");
+    }
+
+   
+
     return nameField.reportValidity() && phoneField.reportValidity() &&
-           addressField.reportValidity() && pincodeField.reportValidity();
+           addressField.reportValidity() && veggiesField.reportValidity() &&
+           sproutsField.reportValidity() && gymField.reportValidity();
+          
 }
 
 // Function to initiate payment via PhonePe
 function initiatePayment() {
     const totalAmount = localStorage.getItem('cartTotal');
-    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
+    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
 
+ /*   const upiID = "amithalex5251@oksbi";
+    const recipientName = "Saviour Bites";
+    const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink; */
 
+    // Send confirmation email after checkout
+    sendEmail(billingDetails, cartData, totalAmount);
 }
 
 // Function to clear the cart
@@ -279,19 +319,28 @@ function clearCart() {
     alert("Thank you for your purchase!");
 }
 
-
 function sendEmail(billingDetails, cartData, totalAmount) {
     const templateParams = {
-        user_name: billingDetails.name,
-        user_phone: billingDetails.phone,
-        user_address: billingDetails.address,
-        user_pincode: billingDetails.pincode,
-        cart_data: JSON.stringify(cartData, null, 2), // Formats cart data nicely in the email
-        total_amount: totalAmount
+        from_name: billingDetails.name,
+        from_email: billingDetails.email, // Assuming you collect the user's email
+        to_name: 'Amith', // Or your name or the business name
+        message: `You received a new order! Here are the details:
+        
+        Name: ${billingDetails.name}
+        Phone: ${billingDetails.phone}
+        Address: ${billingDetails.address}
+        Veggies: ${billingDetails.veggies}
+        Sprouts: ${billingDetails.sprouts}
+        Gym Member: ${billingDetails.gym}
+        Message: ${billingDetails.message}
+        
+        Cart Data: ${JSON.stringify(cartData, null, 2)}
+        Total Amount: ${totalAmount}`
     };
 
     try {
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
+        emailjs.send("service_xv2kvlp", "template_eo5yg5e", templateParams)
         .then(response => {
             // Show customer-friendly message for success
             alert("Order placed successfully!");
@@ -316,6 +365,14 @@ function sendEmail(billingDetails, cartData, totalAmount) {
 }
 
 
+//If the cart is modified on one tab, it won't update automatically in another. so adding an event listener for storage to sync the cart:
+window.addEventListener('storage', () => {
+    displayCartItems();
+    updateCartQuantity();
+});
+
+
+
 // Function to handle the checkout process
 function checkout() {
     if (!validateForm()) return;
@@ -326,10 +383,14 @@ function checkout() {
         name: document.getElementById('form-field-fullname').value,
         phone: document.getElementById('form-field-PhoneNo').value,
         address: document.getElementById('form-field-address').value,
-        pincode: document.getElementById('form-field-pincode').value
+        veggies: document.getElementById('form-field-veggies').value,
+        sprouts: document.getElementById('form-field-sprouts').value,
+        gym: document.getElementById('form-field-gym').value,
+        message: document.getElementById('form-field-message').value,
     };
 
-    const totalAmount = localStorage.getItem('cartTotal');
+  
+
 
     fetch('/checkout', {
         method: 'POST',
@@ -341,13 +402,9 @@ function checkout() {
 
     .then(response => response.json())
 
-
         // Initiate payment
         initiatePayment();
-
-        // Send confirmation email after checkout
-        sendEmail(billingDetails, cartData, totalAmount);
-
+    
 }
 
 // Attach checkout function to Place Order button
