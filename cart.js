@@ -1,3 +1,4 @@
+
 function addToCart(category) {
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
 //    const inputs = document.querySelectorAll(`input[data-product]`);
