@@ -297,7 +297,8 @@ function validateForm() {
 // Function to initiate payment via PhonePe
 function initiatePayment() {
     const totalAmount = localStorage.getItem('cartTotal');
-    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+ //   const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
 
  /*   const upiID = "amithalex5251@oksbi";
