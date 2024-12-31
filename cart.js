@@ -249,20 +249,17 @@ function validateForm() {
     } else {
         nameField.setCustomValidity("");
     }
+
     if (!phoneField.value.trim()) {
         phoneField.setCustomValidity("Please enter your 10-digit phone number.");
     } else {
         phoneField.setCustomValidity("");
     }
+
     if (!addressField.value.trim()) {
         addressField.setCustomValidity("Please enter your address.");
     } else {
         addressField.setCustomValidity("");
-    }
-    if (!pincodeField.value.trim()) {
-        pincodeField.setCustomValidity("Please enter your 6-digit pin code.");
-    } else {
-        pincodeField.setCustomValidity("");
     }
 
     if (!veggiesField.value) {
@@ -296,9 +293,14 @@ function validateForm() {
 
 // Function to initiate payment via PhonePe
 function initiatePayment() {
-    const totalAmount = localStorage.getItem('cartTotal');
- //   const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
-    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=YourName&am=${totalAmount}&cu=INR`;
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (totalAmount <= 0) {
+        alert("Your cart is empty! Please add items before placing the order.");
+        return;
+    }
+    
+    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;
 
  /*   const upiID = "amithalex5251@oksbi";
