@@ -36,7 +36,7 @@ function calculateTotal() {
     let total = 0;
 
     // Loop through each product's subtotal and add it to the total
-    for (let i = 1; i <= 50; i++) {      // Adjust '25' to match the number of products if needed
+    for (let i = 1; i <= 25; i++) {      // Adjust '25' to match the number of products if needed
         const subtotalElement = document.getElementById(`subtotal${i}`);
         
         if (subtotalElement) {           // Check if the element exists
