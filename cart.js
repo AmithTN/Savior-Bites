@@ -361,8 +361,8 @@ function clearCart() {
     alert("Thank you for your purchase!");
 }
 
-function sendEmail(billingDetails, cartData, totalAmount) {
-/*    const templateParams = {
+/*function sendEmail(billingDetails, cartData, totalAmount) {
+    const templateParams = {
         from_name: billingDetails.name,
         from_email: billingDetails.email, // Assuming you collect the user's email
         to_name: 'Amith', // Or your name or the business name
@@ -448,8 +448,6 @@ function checkout() {
     };
 
   
-
-
     fetch('/checkout', {
         method: 'POST',
         headers: {
@@ -463,14 +461,15 @@ function checkout() {
         // Initiate payment
        // initiatePayment();
 
-       const totalAmount = localStorage.getItem('cartTotal') || 0;
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
 
          // Debugging Logs
     console.log("Cart Data:", cartData);
     console.log("Billing Details:", billingDetails);
     console.log("Total Amount:", totalAmount);
 
-       sendEmail(billingDetails, cartData, totalAmount);
+    sendEmail(billingDetails, cartData, totalAmount);
     
 }
 
