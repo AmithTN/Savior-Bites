@@ -94,7 +94,7 @@ if (cartData.length === 0) {
         </div>
           
         <div class="elementor-field-group elementor-field-type-submit" style="text-align: center;">
-            <button onclick="window.location.href='menu.html'" class="elementor-button elementor-button-submit elementor-size-sm">
+            <button onclick="window.location.href='menu'" class="elementor-button elementor-button-submit elementor-size-sm">
                 Start Shopping
             </button>
         </div>
@@ -137,7 +137,7 @@ if (cartData.length > 0) {
     cartItemHTML += `
         <div class="cart-footer">
             <h2><strong>Total: ₹${total}</strong></h2>
-            <button type="button" class="elementor-button" onclick="window.location.href='checkout.html';" style="margin-top: 10px;">
+            <button type="button" class="elementor-button" onclick="window.location.href='checkout';" style="margin-top: 10px;">
                 Checkout
             </button>
         </div>
@@ -291,65 +291,6 @@ function validateForm() {
           
 }
 
-// Function to initiate payment 
-function initiatePayment() {
-    const totalAmount = localStorage.getItem('cartTotal') || 0;
-
-    if (totalAmount <= 0) {
-        alert("Your cart is empty! Please add items before placing the order.");
-        return;
-    }
-    
-/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink;    */
-
-    const upiID = "amithalex5251@oksbi";
-    const recipientName = "Saviour Bites";
-    const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink; 
-
-        // Add a fallback if the UPI app does not process the payment
-        setTimeout(() => {
-            alert("If the UPI payment fails, you can try scanning our QR code or use an alternative payment method.");
-
-                    // Generate and display QR Code as fallback
-                    generateQRCode(upiLink);
-        }, 3000);
-
-
-
-
-
-    // Send confirmation email after checkout
-    sendEmail(billingDetails, cartData, totalAmount);
-}
-
-// Function to generate QR Code
-function generateQRCode(upiLink) {
-    const qrCodeContainer = document.getElementById("qrCode");
-    if (!qrCodeContainer) {
-        alert("QR Code container not found on the page!");
-        return;
-    }
-
-    // Clear previous QR code if present
-    qrCodeContainer.innerHTML = "";
-
-    // Create a <canvas> element
-    const canvas = document.createElement("canvas");
-    qrCodeContainer.appendChild(canvas);
-
-    // Generate QR Code onto the <canvas>
-    QRCode.toCanvas(canvas, upiLink, function (error) {
-        if (error) {
-            console.error("QR Code generation error:", error);
-            alert("Failed to generate QR code.");
-        } else {
-            console.log("QR Code generated successfully!");
-        }
-    });
-}
-
 
 // Function to clear the cart
 function clearCart() {
@@ -361,25 +302,6 @@ function clearCart() {
     alert("Thank you for your purchase!");
 }
 
-/*function sendEmail(billingDetails, cartData, totalAmount) {
-    const templateParams = {
-        from_name: billingDetails.name,
-        from_email: billingDetails.email, // Assuming you collect the user's email
-        to_name: 'Amith', // Or your name or the business name
-        message: `You received a new order! Here are the details:
-        
-        Name: ${billingDetails.name}
-        Phone: ${billingDetails.phone}
-        Address: ${billingDetails.address}
-        Veggies: ${billingDetails.veggies}
-        Sprouts: ${billingDetails.sprouts}
-        Gym Member: ${billingDetails.gym}
-        Message: ${billingDetails.message}
-        
-        Cart Data: ${JSON.stringify(cartData, null, 2)}
-        Total Amount: ${totalAmount}`
-    };
-*/
     function sendEmail(billingDetails, cartData, totalAmount) {
         const templateParams = {
             user_name: billingDetails.name,
@@ -436,6 +358,7 @@ function checkout() {
     if (!validateForm()) return;
 
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
 
     const billingDetails = {
         name: document.getElementById('form-field-fullname').value,
@@ -447,7 +370,12 @@ function checkout() {
         message: document.getElementById('form-field-message').value,
     };
 
-  
+    // Debugging Logs
+    console.log("Cart Data:", cartData);
+    console.log("Billing Details:", billingDetails);
+    console.log("Total Amount:", totalAmount);
+
+    // Fetch call to checkout endpoint
     fetch('/checkout', {
         method: 'POST',
         headers: {
@@ -455,23 +383,22 @@ function checkout() {
         },
         body: JSON.stringify({ cartData, billingDetails }),
     })
+    .then(response => {
+        console.log("Response:", response);
+        return response.json(); // Ensure response is JSON
+    })
+    .then(data => {
+        console.log("Server Response:", data);
 
-    .then(response => response.json())
-
-        // Initiate payment
-       // initiatePayment();
-
-    const totalAmount = localStorage.getItem('cartTotal') || 0;
-
-
-         // Debugging Logs
-    console.log("Cart Data:", cartData);
-    console.log("Billing Details:", billingDetails);
-    console.log("Total Amount:", totalAmount);
-
-    sendEmail(billingDetails, cartData, totalAmount);
-    
+        // Send email after server response
+        sendEmail(billingDetails, cartData, totalAmount);
+    })
+    .catch(error => {
+        console.error("Error from /checkout endpoint:", error);
+        alert("An error occurred during checkout. Please try again.");
+    });
 }
+
 
 // Attach checkout function to Place Order button
 document.getElementById('place_order').addEventListener('click', (e) => {
