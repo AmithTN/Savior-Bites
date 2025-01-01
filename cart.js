@@ -291,7 +291,7 @@ function validateForm() {
           
 }
 
-// Function to initiate payment via PhonePe
+// Function to initiate payment 
 function initiatePayment() {
     const totalAmount = localStorage.getItem('cartTotal') || 0;
 
@@ -300,17 +300,56 @@ function initiatePayment() {
         return;
     }
     
-    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink;
+/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink;    */
 
- /*   const upiID = "amithalex5251@oksbi";
+    const upiID = "amithalex5251@oksbi";
     const recipientName = "Saviour Bites";
     const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink; */
+    window.location.href = upiLink; 
+
+        // Add a fallback if the UPI app does not process the payment
+        setTimeout(() => {
+            alert("If the UPI payment fails, you can try scanning our QR code or use an alternative payment method.");
+
+                    // Generate and display QR Code as fallback
+                    generateQRCode(upiLink);
+        }, 3000);
+
+
+
+
 
     // Send confirmation email after checkout
     sendEmail(billingDetails, cartData, totalAmount);
 }
+
+// Function to generate QR Code
+function generateQRCode(upiLink) {
+    const qrCodeContainer = document.getElementById("qrCode");
+    if (!qrCodeContainer) {
+        alert("QR Code container not found on the page!");
+        return;
+    }
+
+    // Clear previous QR code if present
+    qrCodeContainer.innerHTML = "";
+
+    // Create a <canvas> element
+    const canvas = document.createElement("canvas");
+    qrCodeContainer.appendChild(canvas);
+
+    // Generate QR Code onto the <canvas>
+    QRCode.toCanvas(canvas, upiLink, function (error) {
+        if (error) {
+            console.error("QR Code generation error:", error);
+            alert("Failed to generate QR code.");
+        } else {
+            console.log("QR Code generated successfully!");
+        }
+    });
+}
+
 
 // Function to clear the cart
 function clearCart() {
@@ -323,7 +362,7 @@ function clearCart() {
 }
 
 function sendEmail(billingDetails, cartData, totalAmount) {
-    const templateParams = {
+/*    const templateParams = {
         from_name: billingDetails.name,
         from_email: billingDetails.email, // Assuming you collect the user's email
         to_name: 'Amith', // Or your name or the business name
@@ -340,18 +379,33 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         Cart Data: ${JSON.stringify(cartData, null, 2)}
         Total Amount: ${totalAmount}`
     };
+*/
+    function sendEmail(billingDetails, cartData, totalAmount) {
+        const templateParams = {
+            user_name: billingDetails.name,
+            user_phone: billingDetails.phone,
+            user_address: billingDetails.address,
+            user_veggies: billingDetails.veggies,
+            user_sprouts: billingDetails.sprouts,
+            user_gym: billingDetails.gym,
+            user_message: billingDetails.message,
+
+            cart_data: JSON.stringify(cartData, null, 2),
+            total_amount: totalAmount,
+        };
 
     try {
         // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
-        emailjs.send("service_xv2kvlp", "template_eo5yg5e", templateParams)
-        .then(response => {
-            // Show customer-friendly message for success
-            alert("Order placed successfully!");
+        emailjs
+            .send("service_xv2kvlp", "template_eo5yg5e", templateParams)
+            .then(response => {
+                // Show customer-friendly message for success
+                alert("Order placed successfully!");
 
-            console.log("Email sent successfully:", response.status, response.text); // For debugging
+                console.log("Email sent successfully:", response.status, response.text); // For debugging
 
-            // Clear the cart after successful email
-            clearCart();
+                // Clear the cart after successful email
+                clearCart();
         })
         .catch(error => {
             // Log the error for debugging
@@ -366,6 +420,7 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         alert("An unexpected error occurred. Please try again later.");
     }
 }
+
 
 
 //If the cart is modified on one tab, it won't update automatically in another. so adding an event listener for storage to sync the cart:
@@ -406,7 +461,16 @@ function checkout() {
     .then(response => response.json())
 
         // Initiate payment
-        initiatePayment();
+       // initiatePayment();
+
+       const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+         // Debugging Logs
+    console.log("Cart Data:", cartData);
+    console.log("Billing Details:", billingDetails);
+    console.log("Total Amount:", totalAmount);
+
+       sendEmail(billingDetails, cartData, totalAmount);
     
 }
 
