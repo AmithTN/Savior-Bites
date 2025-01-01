@@ -292,64 +292,12 @@ function validateForm() {
 }
 
 
-// Function to clear the cart
-function clearCart() {
-
-    localStorage.removeItem('cartData');
-    localStorage.removeItem('cartTotal');
-    document.getElementById('cart-container').innerHTML = '';
-    document.getElementById('cart-total').textContent = '0';    
-    alert("Thank you for your purchase!");
-}
-
-    function sendEmail(billingDetails, cartData, totalAmount) {
-        const templateParams = {
-            user_name: billingDetails.name,
-            user_phone: billingDetails.phone,
-            user_address: billingDetails.address,
-            user_veggies: billingDetails.veggies,
-            user_sprouts: billingDetails.sprouts,
-            user_gym: billingDetails.gym,
-            user_message: billingDetails.message,
-
-            cart_data: JSON.stringify(cartData, null, 2),
-            total_amount: totalAmount,
-        };
-
-    try {
-        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual values
-        emailjs
-            .send("service_xv2kvlp", "template_eo5yg5e", templateParams)
-            .then(response => {
-                // Show customer-friendly message for success
-                alert("Order placed successfully!");
-
-                console.log("Email sent successfully:", response.status, response.text); // For debugging
-
-                // Clear the cart after successful email
-                clearCart();
-        })
-        .catch(error => {
-            // Log the error for debugging
-            console.error("Failed to send email:", error);
-
-            // Show customer-friendly message for failure
-            alert("We encountered an issue while processing your order. Please try again.");
-        });
-    } catch (error) {
-        // Catch any synchronous errors in the try block
-        console.error("Unexpected error:", error);
-        alert("An unexpected error occurred. Please try again later.");
-    }
-}
-
-
-
 //If the cart is modified on one tab, it won't update automatically in another. so adding an event listener for storage to sync the cart:
 window.addEventListener('storage', () => {
     displayCartItems();
     updateCartQuantity();
 });
+
 
 
 
@@ -359,6 +307,11 @@ function checkout() {
 
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
     const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (!cartData.length) {
+        alert("Your cart is empty! Please add items before checking out.");
+        return;
+    }
 
     const billingDetails = {
         name: document.getElementById('form-field-fullname').value,
@@ -370,35 +323,60 @@ function checkout() {
         message: document.getElementById('form-field-message').value,
     };
 
-    // Debugging Logs
     console.log("Cart Data:", cartData);
     console.log("Billing Details:", billingDetails);
     console.log("Total Amount:", totalAmount);
 
-    // Fetch call to checkout endpoint
-    fetch('/checkout', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cartData, billingDetails }),
-    })
-    .then(response => {
-        console.log("Response:", response);
-        return response.json(); // Ensure response is JSON
-    })
-    .then(data => {
-        console.log("Server Response:", data);
-
-        // Send email after server response
-        sendEmail(billingDetails, cartData, totalAmount);
-    })
-    .catch(error => {
-        console.error("Error from /checkout endpoint:", error);
-        alert("An error occurred during checkout. Please try again.");
-    });
+    sendEmail(billingDetails, cartData, totalAmount);
 }
 
+//Function to send email
+
+function sendEmail(billingDetails, cartData, totalAmount) {
+    const templateParams = {
+        user_name: billingDetails.name,
+        user_phone: billingDetails.phone,
+        user_address: billingDetails.address,
+        user_veggies: billingDetails.veggies,
+        user_sprouts: billingDetails.sprouts,
+        user_gym: billingDetails.gym,
+        user_message: billingDetails.message,
+        cart_data: JSON.stringify(cartData, null, 2),
+        total_amount: totalAmount,
+    };
+
+    try {
+        emailjs
+            .send("service_xv2kvlp", "template_eo5yg5e", templateParams)
+            .then((response) => {
+                alert("Order placed successfully!");
+                console.log("Email sent successfully:", response.status, response.text);
+
+                clearCart();
+            })
+            .catch((error) => {
+                console.error("Failed to send email:", error);
+                alert("We encountered an issue while processing your order. Please try again.");
+            });
+    } catch (error) {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred. Please try again later.");
+    }
+}
+
+// function to clear the local storage
+
+function clearCart() {
+    localStorage.removeItem("cartData");
+    localStorage.removeItem("cartTotal");
+    const cartContainer = document.getElementById("cart-container");
+    const cartTotal = document.getElementById("cart-total");
+
+    if (cartContainer) cartContainer.innerHTML = "";
+    if (cartTotal) cartTotal.textContent = "0";
+
+    alert("Thank you for your purchase!");
+}
 
 // Attach checkout function to Place Order button
 document.getElementById('place_order').addEventListener('click', (e) => {
