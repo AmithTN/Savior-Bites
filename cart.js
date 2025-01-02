@@ -343,7 +343,7 @@ function initiatePayment() {
 /*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;    */
 
-    const upiID = "paytm.slav2zw@pty";
+    const upiID = "stk-7338534614-1@oksbizaxis";
     const recipientName = "Saviour Bites";
     const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink; 
