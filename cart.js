@@ -326,9 +326,38 @@ function checkout() {
     console.log("Cart Data:", cartData);
     console.log("Billing Details:", billingDetails);
     console.log("Total Amount:", totalAmount);
+    
+    initiatePayment();
+}
 
+
+// Function to initiate payment 
+function initiatePayment() {
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (totalAmount <= 0) {
+        alert("Your cart is empty! Please add items before placing the order.");
+        return;
+    }
+    
+/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink;    */
+
+    const upiID = "paytm.slav2zw@pty";
+    const recipientName = "Saviour Bites";
+    const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink; 
+
+        // Add a fallback if the UPI app does not process the payment
+        setTimeout(() => {
+            alert("If the UPI payment fails, you can try scanning our QR code or use an alternative payment method.");
+        }, 3000);
+
+
+    // Send confirmation email after checkout
     sendEmail(billingDetails, cartData, totalAmount);
 }
+
 
 //Function to send email
 
