@@ -346,19 +346,7 @@ function initiatePayment() {
     const upiID = "stk-7338534614-1@oksbizaxis";
     const recipientName = "Saviour Bites";
     const upiLink = `upi://pay?pa=${upiID}&pn=${recipientName}&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink; 
-
-        const upiId = amithalex5251@oksbi"; // Replace with your UPI ID
-        const payeeName = "SaviourBites"; // Replace with your business name
-        const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
-        const referenceId = "REF" + new Date().getTime(); // Unique reference ID
-        const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
-        const currency = "INR";
-
-        const upiUrl = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&am=${totalAmount}&cu=${currency}`;
-
-
-    
+    window.location.href = upiLink;     
 
         // Add a fallback if the UPI app does not process the payment
         setTimeout(() => {
